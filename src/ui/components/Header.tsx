@@ -1,5 +1,5 @@
 import { Logo } from "./Logo";
-import { Nav } from "./nav/Nav";
+import { Nav } from "./nav/zxNav";
 
 export function Header({ channel }: { channel: string }) {
 	return (

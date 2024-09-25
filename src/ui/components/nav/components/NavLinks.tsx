@@ -9,6 +9,8 @@ export const NavLinks = async ({ channel }: { channel: string }) => {
 		revalidate: 60 * 60 * 24,
 	});
 
+	console.log(JSON.stringify(navLinks));
+
 	return (
 		<>
 			<NavLink href="/products">All</NavLink>
