@@ -4,7 +4,7 @@ import { z } from "zod";
 
 import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
-import { pool } from "../database";
+import { pool } from "../db";
 import type { User } from "@/app/lib/definitions";
 import bcrypt from "bcrypt";
 import { createSession } from "@/app/lib/session";

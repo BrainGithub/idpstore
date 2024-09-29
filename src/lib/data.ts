@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { pool } from "./database";
+import { pool } from "./db";
 import { formatCurrency } from "./dashboard-util";
 
 export async function fetchRevenue() {

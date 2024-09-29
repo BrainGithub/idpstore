@@ -1,7 +1,7 @@
 "use server";
 
 import { z } from "zod";
-import { pool } from "../database";
+import { pool } from "../db";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 

@@ -41,3 +41,6 @@ next-env.d.ts
 /playwright/.cache/
 
 .idea/
+
+# images
+/public/images/

@@ -4,5 +4,5 @@ export default function EmptyPage() {
 	// redirect("/default-channel");
 	// redirect("/login");
 	// redirect("/dashboard");
-	redirect("/images");
+	redirect("/posts");
 }

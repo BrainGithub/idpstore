@@ -11,8 +11,8 @@ export default function RootLayout(props: { children: ReactNode; params: { chann
 	return (
 		<>
 			<Header channel={props.params.channel} />
-			<div className="flex min-h-[calc(100dvh-64px)] flex-col">
-				<main className="flex-1">{props.children}</main>
+			<div className="flex h-full min-h-[calc(100dvh-64px)] flex-col">
+				<main className="h-full flex-1">{props.children}</main>
 				<Footer channel={props.params.channel} />
 			</div>
 		</>
