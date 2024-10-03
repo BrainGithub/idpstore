@@ -1,30 +1,47 @@
 import { prisma } from "../../lib/db";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
+import rehypeHighlight from "rehype-highlight";
+import React from "react";
 import Breadcrumbs from "@/ui/breadcrumbs";
 import { PostHeader } from "./ui/post-header";
+import { auth } from "../../../auth";
 
 export const metadata = {
 	title: "Axpz Posts",
 	description: "",
 };
 
-export default async function Page({
-	props,
-}: {
-	props?: {
-		query?: string;
-		page?: string;
-	};
-}) {
+export default async function Page() {
 	// console.dir(props);
-	console.log("----posts----");
+	// console.log("----posts----", props);
 
-	const posts = await prisma.post.findMany({
-		include: {
-			author: true,
-		},
-	});
-	// console.dir(posts);
+	let posts: any[] = [];
+	const session = await auth();
+	if (session) {
+		posts = await prisma.post.findMany({
+			include: {
+				author: true,
+			},
+			orderBy: {
+				updatedAt: "desc",
+			},
+		});
+	} else {
+		posts = await prisma.post.findMany({
+			where: {
+				published: true,
+			},
+			include: {
+				author: true,
+			},
+			orderBy: {
+				updatedAt: "desc",
+			},
+		});
+	}
+
 	// const totalCount = await prisma.post.count();
 
 	return (
@@ -42,11 +59,13 @@ export default async function Page({
 							<article className="space-y-4">
 								<PostHeader post={post} />
 								<section className="prose max-w-none">
-									<ReactMarkdown>
-										{post.content
-											? post.content.slice(0, 500) + (post.content.length > 500 ? "..." : "")
-											: ""}
-									</ReactMarkdown>
+									<div className="container">
+										<ReactMarkdown rehypePlugins={[rehypeRaw, rehypeHighlight]} remarkPlugins={[remarkGfm]}>
+											{post.content
+												? post.content.slice(0, 500) + (post.content.length > 500 ? "..." : "")
+												: ""}
+										</ReactMarkdown>
+									</div>
 								</section>
 								{/* <footer className="flex items-center justify-between text-gray-500">
 									<small>

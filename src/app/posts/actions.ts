@@ -24,32 +24,7 @@ export type State = {
 
 const UpdatePost = PostFormSchema.omit({ id: true, published: true, authorId: true, date: true });
 
-export async function createPost(formData: FormData) {
-	let postUrl = "/posts";
-	try {
-		const title = formData.get("title") as string;
-		const content = formData.get("content") as string;
-
-		console.log("create post %s", title);
-
-		const post = await prisma.post.create({
-			data: {
-				title: title,
-				content: content,
-			},
-		});
-
-		postUrl += `/${post.id}`;
-		console.log("created post %s", postUrl);
-	} catch (e) {
-		console.error("create post error %s", e);
-	}
-
-	revalidatePath(postUrl);
-	redirect(postUrl);
-}
-
-export async function updatePost(id: string, formData: FormData) {
+export async function updatePost(id: string, prevState: State, formData: FormData) {
 	console.log("updatePost");
 
 	let postUrl = "/posts";
@@ -71,7 +46,7 @@ export async function updatePost(id: string, formData: FormData) {
 
 	const { title, content } = validatedFields.data;
 
-	console.log("update post:", id, title, content);
+	console.log("update post:", id, title);
 
 	try {
 		const post = await prisma.post.update({
@@ -91,6 +66,31 @@ export async function updatePost(id: string, formData: FormData) {
 		return {
 			message: "Failed to update.",
 		};
+	}
+
+	revalidatePath(postUrl);
+	redirect(postUrl);
+}
+
+export async function createPost(formData: FormData) {
+	let postUrl = "/posts";
+	try {
+		const title = formData.get("title") as string;
+		const content = formData.get("content") as string;
+
+		console.log("create post %s", title);
+
+		const post = await prisma.post.create({
+			data: {
+				title: title,
+				content: content,
+			},
+		});
+
+		postUrl += `/${post.id}`;
+		console.log("created post %s", postUrl);
+	} catch (e) {
+		console.error("create post error %s", e);
 	}
 
 	revalidatePath(postUrl);

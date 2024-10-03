@@ -3,15 +3,10 @@ import { prisma } from "@/lib/db";
 import Breadcrumbs from "@/ui/breadcrumbs";
 import { EditForm } from "../../ui/edit-form";
 
-interface PageProps {
-	params: { [key: string]: any };
-	props: any;
-}
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+	console.log("edit post", params);
 
-export default async function Page({ params, props }: PageProps) {
-	console.log("edit post", params, props);
-
-	const id = params.id;
+	const { id } = await params;
 	const post = await prisma.post.findUnique({
 		include: {
 			author: true,

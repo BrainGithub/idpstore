@@ -1,9 +1,12 @@
 import { PencilIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { PublishPost, DeletePost, EditPost } from "./buttons";
+import { auth } from "../../../../auth";
 import Date from "../../../lib/date";
 
-export function PostHeader({ post }: any) {
+export async function PostHeader({ post }: any) {
+	const session = await auth();
+
 	return (
 		<header>
 			<h2 className="text-center text-3xl font-bold text-blue-600 hover:underline">
@@ -15,11 +18,13 @@ export function PostHeader({ post }: any) {
 					<Date dateString={post.updatedAt.toISOString()} />
 				</small>
 			</div>
-			<div className="flex justify-end space-x-1 text-blue-600">
-				<EditPost post={post} />
-				<PublishPost post={post} />
-				<DeletePost post={post} />
-			</div>
+			{session && (
+				<div className="flex justify-end space-x-1 text-blue-600">
+					<EditPost post={post} />
+					<PublishPost post={post} />
+					<DeletePost post={post} />
+				</div>
+			)}
 			{/* </div> */}
 		</header>
 	);

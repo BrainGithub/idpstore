@@ -14,15 +14,16 @@ const numImagesOnePage = 10;
 export default async function Page({
 	searchParams,
 }: {
-	searchParams?: {
-		query?: string;
-		page?: string;
-	};
+	searchParams: Promise<{
+		query: string;
+		page: string;
+	}>; // Ensure searchParams is defined
 }) {
-	console.dir(searchParams);
+	// console.dir(searchParams);
 
 	// const query = searchParams?.query || "";
-	const currentPage = Number(searchParams?.page) || 1;
+	const { page } = await searchParams;
+	const currentPage = Number(page) || 1;
 
 	const imagesDir = path.join(process.cwd(), "public/images");
 

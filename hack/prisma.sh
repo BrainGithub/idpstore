@@ -10,3 +10,5 @@ npx prisma studio
 
 # for the updated database schema changing
 npx prisma db push
+
+npx prisma generate

@@ -2,15 +2,16 @@
 
 import { CheckIcon, ClockIcon, CurrencyDollarIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-// import { updatePost, State } from "../actions";
+import { updatePost, State } from "../actions";
 import { useActionState } from "react";
-import { updatePost, cancelPost } from "../actions";
-import { handleClientScriptLoad } from "next/script";
 
 export function EditForm({ post }: any) {
-	// const initialState: State = { message: null, errors: {} };
+	console.log("useActionState", useActionState);
+
+	const initialState: State = { message: null, errors: {} };
+
 	const updatePostWithId = updatePost.bind(null, post.id);
-	// const [state, formAction] = useActionState(updatePostWithId, initialState);
+	const [state, formAction] = useActionState(updatePostWithId, initialState);
 
 	// const handleCancel = () => {
 	// 	console.log("Cancel Button");
@@ -22,7 +23,7 @@ export function EditForm({ post }: any) {
 		// <form action={formAction}>
 		// 	<input type="hidden" name="id" value={post.id} />
 
-		<form action={updatePostWithId} className="flex h-full flex-col">
+		<form action={formAction} className="flex h-full flex-col">
 			<input type="hidden" name="id" value={post.id} />
 			<div className="mb-4 flex flex-col">
 				<input

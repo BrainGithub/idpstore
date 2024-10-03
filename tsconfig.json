@@ -19,14 +19,14 @@
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"noUncheckedIndexedAccess": false,
+		"noImplicitAny": false,
 		"plugins": [
 			{
 				"name": "next"
 			}
 		],
 		"paths": {
-			"@/*": ["./src/*"],
-			"@ui/*": ["./src/components/*"]
+			"@/*": ["./src/*"]
 		},
 		"types": ["react-dom/canary"]
 	},

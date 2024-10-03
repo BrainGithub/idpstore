@@ -1,5 +1,9 @@
 import { prisma } from "../../../lib/db";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
+import rehypeHighlight from "rehype-highlight";
+import React from "react";
 
 import Breadcrumbs from "@/ui/breadcrumbs";
 import { PostHeader } from "../ui/post-header";
@@ -9,13 +13,15 @@ export const metadata = {
 	description: "",
 };
 
-export default async function Page({ params }: { params: { id: string } }) {
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+	const { id } = await params;
+
 	let post = await prisma.post.findUnique({
 		include: {
 			author: true,
 		},
 		where: {
-			id: params.id,
+			id: id,
 		},
 	});
 
@@ -37,7 +43,11 @@ export default async function Page({ params }: { params: { id: string } }) {
 								<PostHeader post={post} />
 
 								<section className="prose max-w-none">
-									<ReactMarkdown>{post.content}</ReactMarkdown>
+									<div className="subheading-anchor container flex flex-col">
+										<ReactMarkdown rehypePlugins={[rehypeRaw, rehypeHighlight]} remarkPlugins={[remarkGfm]}>
+											{post.content}
+										</ReactMarkdown>
+									</div>
 								</section>
 							</article>
 						</li>

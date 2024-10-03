@@ -1,5 +1,5 @@
 import { type Metadata } from "next";
-import { SideNav } from "@/ui/dashboard/sidenav";
+import { SideNav } from "./ui/sidenav";
 
 export const experimental_ppr = true;
 
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 		default: "Axpz Dashboard",
 	},
 	description: "Control plane.",
-	metadataBase: new URL("https://next-learn-dashboard.vercel.sh"),
+	// metadataBase: new URL("https://next-learn-dashboard.vercel.sh"),
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
