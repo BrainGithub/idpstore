@@ -1,13 +1,13 @@
 // "use server";
 "use client";
 
-import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
+// import { revalidatePath } from "next/cache";
+// import { redirect } from "next/navigation";
 // import { signIn, signOut, auth } from "../../../auth";
 import { Button } from "./ui/button";
 import { UserIcon } from "lucide-react";
 // import { signOut as nextAuthSignOut } from "next-auth/react";
-import { signInAction, signOutAction } from "../../lib/actions/authentication";
+// import { signInAction, signOutAction } from "../../lib/actions/authentication";
 import Link from "next/link";
 
 export function SignIn({
@@ -31,13 +31,13 @@ export function SignIn({
 	);
 }
 
-export function SignOut(props: React.ComponentPropsWithRef<typeof Button>) {
-	const formAction = async (event: React.FormEvent) => {
-		event.preventDefault();
-		console.log("---------provider");
-		// await signOutAction();
-		window.location.href = "/api/auth/signout";
-	};
+export function SignOut(_props: React.ComponentPropsWithRef<typeof Button>) {
+	// const formAction = async (event: React.FormEvent) => {
+	// 	event.preventDefault();
+	// 	console.log("---------provider");
+	// 	// await signOutAction();
+	// 	window.location.href = "/api/auth/signout";
+	// };
 	return (
 		// <form onSubmit={formAction}>
 		// {/* <Button variant="ghost" className="w-full p-0" {...props}>

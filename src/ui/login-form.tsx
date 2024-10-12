@@ -4,14 +4,30 @@ import { lusitana } from "./fonts";
 import { AtSymbolIcon, KeyIcon, ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { Button } from "../app/dashboard/ui/button";
-import { useActionState } from "react";
+import { useState } from "react";
 import { signInAction } from "../lib/actions/authentication";
 
 export default function LoginForm() {
-	const [errorMessage, formAction, isPending] = useActionState(signInAction, undefined);
+	// const [errorMessage, formAction, isPending] = useActionState(signInAction, undefined);
+
+	const [state, setState] = useState({ message: "", errors: {} });
+	const [isPending, setIsPending] = useState(false);
+
+	async function formAction(event: React.FormEvent<HTMLFormElement>) {
+		event.preventDefault();
+		setIsPending(true);
+		try {
+			await signInAction();
+			setState({ message: "", errors: {} });
+		} catch (error) {
+			setState({ message: "Login failed", errors: { form: error as string } });
+		} finally {
+			setIsPending(false);
+		}
+	}
 
 	return (
-		<form action={formAction} className="space-y-3">
+		<form onSubmit={formAction} className="space-y-3">
 			<div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
 				<h1 className={`${lusitana.className} mb-3 text-2xl`}>Please log in to continue.</h1>
 				<div className="w-full">
@@ -53,10 +69,10 @@ export default function LoginForm() {
 					Log in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
 				</Button>
 				<div className="flex h-8 items-end space-x-1" aria-live="polite" aria-atomic="true">
-					{errorMessage ? (
+					{state.message ? (
 						<>
 							<ExclamationCircleIcon className="h-5 w-5 text-red-500" />
-							<p className="text-sm text-red-500">{errorMessage}</p>
+							<p className="text-sm text-red-500">{state.message}</p>
 						</>
 					) : null}
 				</div>

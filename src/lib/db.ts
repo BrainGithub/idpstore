@@ -13,7 +13,7 @@ const pool = new pg.Pool({
 });
 
 // used for transactions by fetch one connection from the pool
-const client = await pool.connect();
+const client = pool.connect();
 
 // prisma client for type-safe database queries
 const prismaClientSingleton = () => {

@@ -1,9 +1,11 @@
+// "use client";
+
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { type ReactNode } from "react";
 import { type Metadata } from "next";
-import { Footer } from "@/ui/components/Footer";
-import { Header } from "@/ui/components/Header";
+// import { Footer } from "@/ui/components/Footer";
+// import { Header } from "@/ui/components/Header";
 import { DraftModeNotification } from "@/ui/components/DraftModeNotification";
 import { SessionProvider } from "next-auth/react";
 

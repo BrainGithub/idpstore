@@ -1,8 +1,8 @@
-import { Suspense } from "react";
-import { UserMenuContainer } from "./components/UserMenu/UserMenuContainer";
-import { CartNavItem } from "./components/CartNavItem";
-import { NavLinks } from "./components/zxNavLinks";
-import { MobileMenu } from "./components/MobileMenu";
+// import { Suspense } from "react";
+// import { UserMenuContainer } from "./components/UserMenu/UserMenuContainer";
+// import { CartNavItem } from "./components/CartNavItem";
+// import { NavLinks } from "./components/zxNavLinks";
+// import { MobileMenu } from "./components/MobileMenu";
 import { SearchBar } from "./components/SearchBar";
 import UserButton from "../../components-auth/user-button";
 

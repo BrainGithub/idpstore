@@ -1,6 +1,6 @@
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Avatar, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
-import { auth } from "../../../auth";
+// import { auth } from "../../../auth";
 import { UserIcon } from "lucide-react";
 import { useSession } from "next-auth/react";
 
@@ -13,12 +13,13 @@ import {
 } from "./ui/dropdown-menu";
 
 import { SignIn, SignOut } from "./auth-components";
+// import { use } from "react";
 
 export default async function UserButton() {
 	// const { data: session, status } = useSession();
 	// const session = useSession();
 	// const session = await auth();
-	const session = await auth();
+	const { data: session } = useSession();
 	if (!session?.user) return <SignIn />;
 
 	console.log("---------session");

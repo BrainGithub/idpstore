@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { deletePost, publishPost } from "../actions";
+// import Link from "next/link";
+import { publishPost } from "../actions";
 
 export function PublishPost({ post }: any) {
 	const publishPostWithId = publishPost.bind(null, post.id, !post.published);

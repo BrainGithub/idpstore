@@ -1,17 +1,25 @@
 "use client";
 
-import { CheckIcon, ClockIcon, CurrencyDollarIcon, UserCircleIcon } from "@heroicons/react/24/outline";
+// import { CheckIcon, ClockIcon, CurrencyDollarIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { updatePost, State } from "../actions";
-import { useActionState } from "react";
+import { useState } from "react";
 
 export function EditForm({ post }: any) {
-	console.log("useActionState", useActionState);
+	console.log("useActionState", useState);
 
 	const initialState: State = { message: null, errors: {} };
 
-	const updatePostWithId = updatePost.bind(null, post.id);
-	const [state, formAction] = useActionState(updatePostWithId, initialState);
+	// const updatePostWithId = updatePost.bind(null, post.id);
+	const [state, setState] = useState(initialState);
+
+	const formAction = async (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		const formData = new FormData(event.currentTarget);
+		// const data = Object.fromEntries(formData.entries());
+		const result = await updatePost(post.id, state, formData);
+		setState(result);
+	};
 
 	// const handleCancel = () => {
 	// 	console.log("Cancel Button");
@@ -23,7 +31,7 @@ export function EditForm({ post }: any) {
 		// <form action={formAction}>
 		// 	<input type="hidden" name="id" value={post.id} />
 
-		<form action={formAction} className="flex h-full flex-col">
+		<form onSubmit={formAction} className="flex h-full flex-col">
 			<input type="hidden" name="id" value={post.id} />
 			<div className="mb-4 flex flex-col">
 				<input

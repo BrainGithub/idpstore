@@ -8,6 +8,6 @@ const pool = new pg.Pool({
 	database: process.env.DB_NAME,
 });
 
-const client = await pool.connect(); // used for transactions
+const client = pool.connect(); // used for transactions
 
 export { pool, client };

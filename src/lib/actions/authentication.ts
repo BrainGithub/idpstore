@@ -1,14 +1,14 @@
 "use server";
 
-import { z } from "zod";
+// import { z } from "zod";
 
-import { signIn, signOut } from "../../../auth";
-import { AuthError } from "next-auth";
-import { pool } from "../db";
-import type { User } from "@/app/lib/definitions";
-import bcrypt from "bcrypt";
-import { createSession } from "@/app/lib/session";
-import { redirect } from "next/navigation";
+// import { signIn, signOut } from "../../../auth";
+import { signIn, signOut } from "next-auth/react";
+// import { pool } from "../db";
+// import type { User } from "@/app/lib/definitions";
+// import bcrypt from "bcrypt";
+// import { createSession } from "@/app/lib/session";
+// import { redirect } from "next/navigation";
 
 // export async function getUser(email: string): Promise<User | undefined> {
 // 	try {

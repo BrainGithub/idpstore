@@ -4,14 +4,33 @@ import { lusitana } from "./fonts";
 import { AtSymbolIcon, KeyIcon, ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { Button } from "./button";
-import { useActionState } from "react";
+import { useState } from "react";
 import { authSignIn } from "../lib/actions/authentication";
 
 export default function LoginForm() {
-	const [errorMessage, formAction, isPending] = useActionState(authSignIn, undefined);
+	// authSignInAction = authSignIn.bind()
+	const [errorMessage, setErrorMessage] = useState<string | null>(null);
+	const [isPending, setIsPending] = useState(false);
+
+	const formAction = async (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		setIsPending(true);
+		const formData = new FormData(event.currentTarget);
+		// const email = formData.get("email") as string;
+		// const password = formData.get("password") as string;
+
+		try {
+			await authSignIn("", formData);
+			setErrorMessage(null);
+		} catch (error) {
+			setErrorMessage("Login failed. Please try again.");
+		} finally {
+			setIsPending(false);
+		}
+	};
 
 	return (
-		<form action={formAction} className="space-y-3">
+		<form onSubmit={formAction} className="space-y-3">
 			<div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
 				<h1 className={`${lusitana.className} mb-3 text-2xl`}>Please log in to continue.</h1>
 				<div className="w-full">

@@ -1,11 +1,12 @@
-import { PencilIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
+// import { PencilIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { PublishPost, DeletePost, EditPost } from "./buttons";
-import { auth } from "../../../../auth";
+// import { auth } from "../../../../auth";
 import Date from "../../../lib/date";
+import { useSession } from "next-auth/react";
 
 export async function PostHeader({ post }: any) {
-	const session = await auth();
+	const session = useSession();
 
 	return (
 		<header>

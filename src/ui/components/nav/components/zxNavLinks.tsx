@@ -1,11 +1,11 @@
 // eslint-disable-next-line no-unused-vars
-import Link from "next/link";
+// import Link from "next/link";
 import { NavLink } from "./NavLink";
 // eslint-disable-next-line no-unused-vars
-import { executeGraphQL } from "@/lib/graphql";
-// eslint-disable-next-line no-unused-vars
-import { MenuGetBySlugDocument } from "@/gql/graphql";
-import { url } from "inspector";
+// import { executeGraphQL } from "@/lib/graphql";
+// // eslint-disable-next-line no-unused-vars
+// import { MenuGetBySlugDocument } from "@/gql/graphql";
+// import { url } from "inspector";
 
 // eslint-disable-next-line no-unused-vars
 export const NavLinks = async ({ channel }: { channel: string }) => {

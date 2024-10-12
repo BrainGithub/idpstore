@@ -24,7 +24,7 @@ export type State = {
 
 const UpdatePost = PostFormSchema.omit({ id: true, published: true, authorId: true, date: true });
 
-export async function updatePost(id: string, prevState: State, formData: FormData) {
+export async function updatePost(id: string, _prevState: State, formData: FormData) {
 	console.log("updatePost");
 
 	let postUrl = "/posts";

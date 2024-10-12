@@ -1,4 +1,4 @@
-import { draftMode } from "next/headers";
+// import { draftMode } from "next/headers";
 import Link from "next/link";
 
 export const DraftModeNotification = () => {

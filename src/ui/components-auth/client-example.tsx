@@ -1,6 +1,12 @@
 "use client";
 
 import { useSession } from "next-auth/react";
+
+declare module "next-auth" {
+  interface Session {
+	accessToken?: string;
+  }
+}
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useState } from "react";

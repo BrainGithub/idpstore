@@ -33,11 +33,11 @@
 // 	);
 // }
 
-// import { signIn } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { useState } from "react";
-// import Link from "next/link";
+import Link from "next/link";
 // import { signIn, signOut, auth } from "../../../../auth";
-import { signIn } from "../../../../auth";
+// import { signIn } from "../../../../auth";
 
 export default function SignIn() {
 	const [username, setUsername] = useState("");
@@ -57,29 +57,29 @@ export default function SignIn() {
 			window.location.href = "/";
 		}
 	};
-	return signIn();
+	// return signIn();
 
-	// return (
-	// 	<div>
-	// 		<h1>登录</h1>
-	// 		<form onSubmit={handleSubmit}>
-	// 			<div>
-	// 				<label>
-	// 					用户名:
-	// 					<input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-	// 				</label>
-	// 			</div>
-	// 			<div>
-	// 				<label>
-	// 					密码:
-	// 					<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-	// 				</label>
-	// 			</div>
-	// 			<button type="submit">登录</button>
-	// 		</form>
-	// 		<div>
-	// 			<Link href="/auth/signup">没有账户？注册</Link>
-	// 		</div>
-	// 	</div>
-	// );
+	return (
+		<div>
+			<h1>登录</h1>
+			<form onSubmit={handleSubmit}>
+				<div>
+					<label>
+						用户名:
+						<input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+					</label>
+				</div>
+				<div>
+					<label>
+						密码:
+						<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+					</label>
+				</div>
+				<button type="submit">登录</button>
+			</form>
+			<div>
+				<Link href="/auth/signup">没有账户？注册</Link>
+			</div>
+		</div>
+	);
 }

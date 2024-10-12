@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
+// import Image from "next/image";
 
 import { cn } from "@/lib/utils";
-import CustomLink from "./custom-link";
+// import CustomLink from "./custom-link";
 import {
 	NavigationMenu,
 	NavigationMenuContent,
@@ -14,7 +14,7 @@ import {
 	navigationMenuTriggerStyle,
 } from "./ui/navigation-menu";
 import React from "react";
-import { Button } from "./ui/button";
+// import { Button } from "./ui/button";
 
 export function MainNav() {
 	return (

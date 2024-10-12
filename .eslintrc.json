@@ -1,5 +1,5 @@
 {
-	"$schema": "https://json.schemastore.org/eslintrc.json",
+	// "$schema": "https://json.schemastore.org/eslintrc.json",
 	"plugins": ["@typescript-eslint", "import"],
 	"parserOptions": {
 		"project": "tsconfig.json"
@@ -15,6 +15,7 @@
 	"rules": {
 		// sort imports
 		"import/order": "error",
+		"useEslintrc": false,
 
 		// no let exports
 		"import/no-mutable-exports": "error",
@@ -110,7 +111,6 @@
 		},
 		{
 			"files": ["__tests__/**/*.{ts,tsx}"],
-			"extends": ["plugin:playwright/recommended"]
 		}
 	],
 	"ignorePatterns": [

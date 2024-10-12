@@ -29,9 +29,9 @@ export type State = {
 const CreateInvoice = InvoiceFormSchema.omit({ id: true, date: true });
 const UpdateInvoice = InvoiceFormSchema.omit({ id: true, date: true });
 
-export async function createInvoice(prevState: State, formData: FormData) {
+export async function createInvoice(_prevState: State, formData: FormData) {
 	console.log("createInvoice");
-	console.log(prevState);
+	// console.log(prevState);
 
 	const validatedFields = CreateInvoice.safeParse({
 		customerId: formData.get("customerId"),
@@ -69,7 +69,7 @@ export async function createInvoice(prevState: State, formData: FormData) {
 	redirect("/dashboard/invoices");
 }
 
-export async function updateInvoice(id: string, prevState: State, formData: FormData) {
+export async function updateInvoice(id: string, _prevState: State, formData: FormData) {
 	const validatedFields = UpdateInvoice.safeParse({
 		customerId: formData.get("customerId"),
 		amount: formData.get("amount"),

@@ -5,7 +5,7 @@ import Image from "next/image";
 // import { ChannelsListDocument, MenuGetBySlugDocument } from "@/gql/graphql";
 // import { executeGraphQL } from "@/lib/graphql";
 
-export async function Footer({ channel }: { channel: string }) {
+export async function Footer() {
 	// nolint
 	// const footerLinks = await executeGraphQL(MenuGetBySlugDocument, {
 	// 	variables: { slug: "footer", channel },

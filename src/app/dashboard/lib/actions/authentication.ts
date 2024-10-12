@@ -2,12 +2,12 @@
 
 import { z } from "zod";
 
-import { signIn } from "@/auth";
-import { AuthError } from "next-auth";
-import { pool } from "../database";
-import type { User } from "@/app/lib/definitions";
+import { signIn } from "next-auth/react";
+// import { AuthError } from "next-auth";
+import { pool } from "../db";
+import type { User } from "../definitions";
 import bcrypt from "bcrypt";
-import { createSession } from "@/app/lib/session";
+import { createSession } from "../../../../lib/session";
 import { redirect } from "next/navigation";
 
 export async function getUser(email: string): Promise<User | undefined> {
@@ -20,18 +20,18 @@ export async function getUser(email: string): Promise<User | undefined> {
 	}
 }
 
-export async function authSignIn(prevState: string | undefined, formData: FormData) {
+export async function authSignIn(_prevState: string | undefined, _formData: FormData) {
 	try {
-		await signIn("credentials", formData);
+		await signIn(); //"credentials", formData);
 	} catch (error) {
-		if (error instanceof AuthError) {
-			switch (error.type) {
-				case "CredentialsSignin":
-					return "Invalid credentials.";
-				default:
-					return "Something went wrong.";
-			}
-		}
+		// if (error instanceof AuthError) {
+		// 	switch (error.type) {
+		// 		case "CredentialsSignin":
+		// 			return "Invalid credentials.";
+		// 		default:
+		// 			return "Something went wrong.";
+		// 	}
+		// }
 		throw error;
 	}
 }
@@ -61,7 +61,7 @@ export type FormState =
 	  }
 	| undefined;
 
-export async function signup(state: FormState, formData: FormData) {
+export async function signup(_state: FormState, formData: FormData) { //no lint
 	// Validate form fields
 	const validatedFields = SignupFormSchema.safeParse({
 		name: formData.get("name"),

@@ -5,7 +5,7 @@ import { CheckIcon, ClockIcon, CurrencyDollarIcon, UserCircleIcon } from "@heroi
 import Link from "next/link";
 import { Button } from "../..//ui/button";
 import { updateInvoice, State } from "../../lib/actions/actions";
-import { useActionState } from "react";
+import { useState } from "react";
 
 export default function EditInvoiceForm({
 	invoice,
@@ -14,12 +14,23 @@ export default function EditInvoiceForm({
 	invoice: InvoiceForm;
 	customers: CustomerField[];
 }) {
+	// const initialState: State = { message: null, errors: {} };
+	// const updateInvoiceWithId = updateInvoice.bind(null, invoice.id);
+	// // const [state, formAction] = useActionState(updateInvoiceWithId, initialState);
+
 	const initialState: State = { message: null, errors: {} };
-	const updateInvoiceWithId = updateInvoice.bind(null, invoice.id);
-	const [state, formAction] = useActionState(updateInvoiceWithId, initialState);
+	const [state, setState] = useState(initialState);
+
+	async function formAction(event: React.FormEvent<HTMLFormElement>) {
+		event.preventDefault();
+		const formData = new FormData(event.currentTarget);
+		// const data = Object.fromEntries(formData.entries());
+		const result = await updateInvoice(invoice.id, formData);
+		setState(result);
+	}
 
 	return (
-		<form action={formAction}>
+		<form onSubmit={formAction}>
 			<input type="hidden" name="id" value={invoice.id} />
 
 			<div className="rounded-md bg-gray-50 p-4 md:p-6">

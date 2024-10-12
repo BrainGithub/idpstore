@@ -2,8 +2,9 @@ import Link from "next/link";
 import { PowerIcon, UserIcon, BookOpenIcon } from "@heroicons/react/24/outline";
 import NavLinks from "@/app/dashboard/ui/nav-links";
 import Logo from "./axpz-logo";
-import { signOut } from "../../../../auth";
-import { redirect } from "next/navigation";
+// import { signOut } from "../../../../auth";
+// import { redirect } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 export function SideNav() {
 	return (

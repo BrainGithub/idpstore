@@ -6,7 +6,8 @@ import rehypeHighlight from "rehype-highlight";
 import React from "react";
 import Breadcrumbs from "@/ui/breadcrumbs";
 import { PostHeader } from "./ui/post-header";
-import { auth } from "../../../auth";
+import { useSession } from "next-auth/react";
+// import { auth } from "../../../auth";
 
 export const metadata = {
 	title: "Axpz Posts",
@@ -18,7 +19,7 @@ export default async function Page() {
 	// console.log("----posts----", props);
 
 	let posts: any[] = [];
-	const session = await auth();
+	const session = useSession();
 	if (session) {
 		posts = await prisma.post.findMany({
 			include: {

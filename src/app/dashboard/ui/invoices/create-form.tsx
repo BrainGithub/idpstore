@@ -6,14 +6,22 @@ import { CheckIcon, ClockIcon, CurrencyDollarIcon, UserCircleIcon } from "@heroi
 
 import { Button } from "../../ui/button";
 import { createInvoice, State } from "../../lib/actions/actions";
-import { useActionState } from "react";
+import { useState } from "react";
 
 export default function Form({ customers }: { customers: CustomerField[] }) {
 	const initialState: State = { message: null, errors: {} };
-	const [state, formAction] = useActionState(createInvoice, initialState);
+	const [state, setState] = useState(initialState);
+
+	async function formAction(event: React.FormEvent<HTMLFormElement>) {
+		event.preventDefault();
+		const formData = new FormData(event.currentTarget);
+		// const data = Object.fromEntries(formData.entries());
+		const result = await createInvoice(state, formData);
+		setState(result);
+	}
 
 	return (
-		<form action={formAction}>
+		<form onSubmit={formAction}>
 			<div className="rounded-md bg-gray-50 p-4 md:p-6">
 				{/* Customer Name */}
 				<div className="mb-4">
